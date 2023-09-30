@@ -1,0 +1,240 @@
+﻿@{
+    ViewData["Title"] = "Update";
+}
+@model UpdateEmployee;
+
+
+
+<div class="col-lg-9" >
+<div class="card" >
+  
+    <div class="card-title" style="text-align:center;">
+        <h2>Edit Employee</h2>
+    </div>
+    <div class="card-body">
+
+        <div class="form-group">
+            <label>Payroll_Number</label>
+            <input id="txtpayroll_Number" value="@Model.Payroll_Number" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Forenames</label>
+            <input id="txtforenames" value="@Model.Forenames" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Surname</label>
+            <input id="txtsurname" value="@Model.Surname" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Date_of_Birth</label>
+            <input id="txtdate_of_Birth" value="@Model.Date_of_Birth" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Telephone</label>
+            <input type="number" id="txttelephone" value="@Model.Telephone" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Mobile</label>
+            <input type="number" id="txtmobile" value="@Model.Mobile" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <input id="txtaddress" value="@Model.Address" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Address_2</label>
+            <input id="txtaddress_2" value="@Model.Address_2" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Postcode</label>
+            <input id="txtpostcode" value="@Model.Postcode" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>EMail_Home</label>
+            <input type="email" id="txteMail_Home" value="@Model.EMail_Home" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Start_Date</label>
+            <input id="txtstart_Date" value="@Model.Start_Date" class="form-control" />
+        </div>
+
+        <div class="form-group" style="margin-top:10px">
+            <div style="text-align:center;">
+                <a onclick="backtolist()" class="btn btn-danger">Cancel</a>
+                <a onclick="handlesave()" class="btn btn-success">Save</a>
+            </div>
+        </div>
+        </div>
+        </div>
+</div>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function handlesave() {
+        var payroll_Number = $('#txtpayroll_Number').val();
+        var forenames = $('#txtforenames').val();
+        var surname = $('#txtsurname').val();
+        var date_of_Birth = $('#txtdate_of_Birth').val();
+        var telephone = $('#txttelephone').val();
+        var mobile = $('#txtmobile').val();
+        var address = $('#txtaddress').val();
+        var address_2 = $('#txtaddress_2').val();
+        var postcode = $('#txtpostcode').val();
+        var eMail_Home = $('#txteMail_Home').val();
+        var start_Date = $('#txtstart_Date').val();
+
+
+        var isproceed = true;
+
+        // validation
+
+        if (payroll_Number != '' && payroll_Number != null) {
+            $('#txtpayroll_Number').css('border-color', '#ccc');
+        } else {
+            $('#txtpayroll_Number').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (forenames != '' && forenames != null) {
+            $('#txtforenames').css('border-color', '#ccc');
+        } else {
+            $('#txtforenames').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (forenames != '' && forenames != null) {
+            $('#txtforenames').css('border-color', '#ccc');
+        } else {
+            $('#txtforenames').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (surname != '' && surname != null) {
+            $('#txtsurname').css('border-color', '#ccc');
+        } else {
+            $('#txtsurname').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (address != '' && address != null) {
+            $('#txtaddress').css('border-color', '#ccc');
+        } else {
+            $('#txtaddress').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (address_2 != '' && address_2 != null) {
+            $('#txtaddress_2').css('border-color', '#ccc');
+        } else {
+            $('#txtaddress_2').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (postcode != '' && postcode != null) {
+            $('#txtpostcode').css('border-color', '#ccc');
+        } else {
+            $('#txtpostcode').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (eMail_Home != '' && eMail_Home != null) {
+            $('#txteMail_Home').css('border-color', '#ccc');
+        } else {
+            $('#txteMail_Home').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (date_of_Birth != '' && date_of_Birth != null) {
+            $('#txtdate_of_Birth').css('border-color', '#ccc');
+        } else {
+            $('#txtdate_of_Birth').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (start_Date != '' && start_Date != null) {
+            $('#txtstart_Date').css('border-color', '#ccc');
+        } else {
+            $('#txtstart_Date').css('border-color', 'red');
+            isproceed = false;
+        }
+
+
+        if (telephone != '0' && telephone != '') {
+            $('#txttelephone').css('border-color', '#ccc');
+        } else {
+            $('#txttelephone').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (mobile != '0' && mobile != '') {
+            $('#txtmobile').css('border-color', '#ccc');
+        } else {
+            $('#txtmobile').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (isproceed) {
+
+            var _employee = new Object();
+            _employee.Payroll_Number = payroll_Number;
+            _employee.Forenames = forenames;
+            _employee.Surname = surname;
+            _employee.Date_of_Birth = date_of_Birth;
+            _employee.Mobile = mobile;
+            _employee.Telephone = telephone;
+            _employee.Address = address;
+            _employee.Address_2 = address_2;
+            _employee.Postcode = postcode;
+            _employee.EMail_Home = eMail_Home;
+            _employee.Start_Date = start_Date;
+
+            var id = @ViewData["id"];
+
+            $.ajax({
+                type: "POST",
+                url: "/Employee/Edit/@ViewData["id"]",
+                data: _employee,
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    if (data == 'pass') {
+                        alert('Saved successfully.');
+                        backtolist();
+                    } else {
+                        alert(data)
+                    }
+                },
+                failure: function (err) {
+
+                }
+            });
+        }
+
+    }
+
+</script>
+
+
+
+<script type="text/javascript">
+
+    function backtolist() {
+        window.location.href = "/Employee/Index";
+    }
+
+</script>
+

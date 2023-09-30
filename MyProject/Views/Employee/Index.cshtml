@@ -1,0 +1,171 @@
+﻿
+<br />
+<br />
+
+<form method="post" class="mx-1 mx-md-4" enctype="multipart/form-data">
+
+    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-8">
+        <input id="txtfile" type="file" class="form-control-file" id="file" name="file">
+    </div>
+
+    <br /> 
+
+    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+        <button type="submit" class="btn btn-primary btn-lg">Enter</button>
+    </div>
+
+</form>
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+@model List<Employee>
+
+<div class="card">
+
+    <div class="card-body">
+        <div class="card-title">
+            <h2>Employee List</h2>
+        </div>
+
+        <table class="class=" table table-bordered table-striped" id='tbllist' style="font-size: 10px;">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <td>Id</td>
+                    <td>Payroll_Number</td>
+                    <td>Forenames</td>
+                    <td>Surname</td>
+                    <td>Date_of_Birth</td>
+                    <td>Telephone</td>
+                    <td>Mobile</td>
+                    <td>Address</td>
+                    <td>Address_2</td>
+                    <td>Postcode</td>
+                    <td>EMail_Home</td>
+                    <td>Start_Date</td>
+
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null && Model.Count > 0)
+                {
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>i)
+                                @Html.HiddenFor(itemdisplay=>Model[i].Id)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Payroll_Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Forenames)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Date_of_Birth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Telephone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Mobile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Address)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Address_2)
+
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Postcode)
+
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].EMail_Home)
+
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(itemdisplay=>Model[i].Start_Date)
+
+                            </td>
+
+
+                            <td>
+                                <a onclick="FunEdit(this)" class="btn btn-primary">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<style type="text/css">
+    #tbllist_filter {
+        margin-bottom: 1%;
+    }
+</style>
+<script type="text/javascript">
+    var js = jQuery.noConflict(true);
+    js(document).ready(function () {
+        LoadListing();
+
+    });
+    function FunEdit(element) {
+        var Id = $(element).closest('tr').find('input[type=hidden]').val();
+        window.location.href = "/employee/Edit?id=" + Id;
+    }
+    function LoadListing() {
+        var empdata = [];
+        $.ajax({
+            type: "Post",
+            url: "/Employee/GetAll",
+            async: false,
+            success: function (data) {
+                $.each(data, function (key, value) {
+                    var editbtn = "<a onclick='FunEdit(this)' class='btn btn-primary'>Edit</a>";
+                    var hdn = "<input type='hidden' value=" + value.id + " />";
+                    var action = editbtn + hdn;
+                    empdata.push([value.id, value.payroll_Number, value.forenames, value.surname, value.date_of_Birth, value.telephone,
+                    value.mobile, value.address, value.address_2, value.postcode, value.eMail_Home, value.start_Date, action])
+                })
+            },
+            failure: function (err) {
+
+            }
+        });
+        js('#tbllist').DataTable({
+            data: empdata
+        });
+    }
+
+</script>
